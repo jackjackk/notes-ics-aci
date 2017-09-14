@@ -63,7 +63,7 @@
     - /gpfs/work/userid
     - 128GB cap
     - you can share data
-    - backed up so every 3 days or so
+    - backed up every 3 days or so
   - scratch
     - /gpfs/scratch/userid
     - no file size limit
@@ -182,9 +182,8 @@
   sftp ...
   #+END_SRC
 - programs: WinSCP, Filezilla
-  - use
 - via Box, Dropbox w/ EoD's Firefox interface (no syncing)
-  - (and no sound!)
+  - (and no sound => no youtube!)
 - specific programs: Globus, Aspera
 *** Submitting a Job
 - submission scripts
@@ -193,7 +192,7 @@
        #+BEGIN_SRC shell
        #PBS directive ...
        #+END_SRC
-       - give requested resources
+       - used for requesting resources
        - only at beginning
     2. commands
   - to submit
@@ -225,7 +224,7 @@
   - iAsk at ics.psu.edu, 54275
 - check doc of other batch systems: TACC, OSC
 - seminar 2
-  - submitting job
+  - submitting jobs
   - compiling simple codes
   - allocation usage
   - intro to parallelization
