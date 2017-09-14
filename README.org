@@ -1,4 +1,3 @@
-#+TITLE: Notes on ICS-ACI
 #+OPTIONS: ^:nil
 
 * System Basics  [[https://psu.app.box.com/s/usn4m5zr2io79idvi7vxn2nsxwkfci0j][Slides]] [2017-09-14 Thu]                                                      :TOC_3:
