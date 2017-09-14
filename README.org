@@ -44,9 +44,9 @@ Original [[https://psu.app.box.com/s/usn4m5zr2io79idvi7vxn2nsxwkfci0j][Slides]] 
   - placed on a node and run process there
   - limited to 4 procs, 12h, 48GB mem
   - does not guarantee exclusive resources like a compute node
-  - used for: debuging, visualization, interaction
+  - used for: debugging, visualization, interaction
 *** File systems
-- three
+- three storage location options
   - home
     - /storage/home/userid
     - small (10GB) but well protected
@@ -182,14 +182,13 @@ Original [[https://psu.app.box.com/s/usn4m5zr2io79idvi7vxn2nsxwkfci0j][Slides]] 
 *** Submitting a Job
 - submission scripts
   - two sections
-    - PBS directives
-      #+BEGIN_SRC shell
-      #PBS directive ...
-      #+END_SRC
-      - give requested resources
-      - only at beginning
-    - commands
-    - 
+    1. PBS directives
+       #+BEGIN_SRC shell
+       #PBS directive ...
+       #+END_SRC
+       - give requested resources
+       - only at beginning
+    2. commands
   - to submit
     #+BEGIN_SRC shell
     qsub submitScript.pbs
