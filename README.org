@@ -1,8 +1,16 @@
 #+TITLE: Notes on ICS-ACI
 #+OPTIONS: ^:nil
 
-* System Basics
-Original [[https://psu.app.box.com/s/usn4m5zr2io79idvi7vxn2nsxwkfci0j][Slides]] [2017-09-14 Thu]
+* System Basics  [[https://psu.app.box.com/s/usn4m5zr2io79idvi7vxn2nsxwkfci0j][Slides]] [2017-09-14 Thu]                                                      :TOC_3:
+   - [[#ics--hpc][ICS & HPC]]
+   - [[#ics-aci][ICS-ACI]]
+     - [[#file-systems][File systems]]
+     - [[#connecting][Connecting]]
+     - [[#terminal][Terminal]]
+     - [[#modules][Modules]]
+     - [[#transfer-data][Transfer data]]
+     - [[#submitting-a-job][Submitting a Job]]
+   - [[#info][Info]]
 
 ** ICS & HPC
 - what is High Performance Computing? Large...
