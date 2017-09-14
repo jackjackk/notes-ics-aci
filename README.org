@@ -40,7 +40,7 @@
   - Hosted resources (LIGO)
 - ACI-B
   - access via ssh only
-  - log into an ~aci-lgn-*- node to submit jobs
+  - log into an ~aci-lgn-*~ node to submit jobs
   - process runs have dedicated resources when they start running
   - what you request is specified in the submission script
   - anybody can access the ~open~ allocation w/ some limitations
