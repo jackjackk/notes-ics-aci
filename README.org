@@ -1,0 +1,230 @@
+#+TITLE: Notes on ICS-ACI
+#+OPTIONS: ^:nil
+
+* System Basics
+Original [[https://psu.app.box.com/s/usn4m5zr2io79idvi7vxn2nsxwkfci0j][Slides]] [2017-09-14 Thu]
+
+** ICS & HPC
+- what is High Performance Computing? Large...
+  - # of processors
+  - # of runs
+  - memory requirements (finance, bio)
+  - storage reqs (ML, big data)
+  - runtime (optimization, poor coding)
+- HPC does not improve single processes!
+- resources
+  - internal
+    - ICS-ACI
+  - external
+    - NSF XSEDE
+    - Blue Waters through GLCPC
+    - DoE
+- people
+  - engagement team (Lavely, Blanton, Pavloski)
+  - iAsk center (help answering questions, mostly on ACI)
+- goal: enable research
+** ICS-ACI
+- 24000 cores
+- very capable tool
+  - ACI-B for batch (high/std/basic memory)
+  - ACI-I for interactive (Rstudio)
+  - Gateways, GPUs (coming soon)
+  - ACI Partitions (CyberLAMP)
+  - Hosted resources (LIGO)
+- ACI-B
+  - access via ssh only
+  - log into an ~aci-lgn-*- node to submit jobs
+  - process runs have dedicated resources when they start running
+  - what you request is specified in the submission script
+  - anybody can access the ~open~ allocation w/ some limitations
+  - slow X session launchable via ~-Y~
+  - used for: production runs, high mem/proc/time
+- ACI-I
+  - access via ssh or EoD
+  - placed on a node and run process there
+  - limited to 4 procs, 12h, 48GB mem
+  - does not guarantee exclusive resources like a compute node
+  - used for: debuging, visualization, interaction
+*** File systems
+- three
+  - home
+    - /storage/home/userid
+    - small (10GB) but well protected
+      - not shared w/ anybody else
+      - backed up frequently
+  - work
+    - /gpfs/work/userid
+    - 128GB cap
+    - you can share data
+    - backed up so every 3 days or so
+  - scratch
+    - /gpfs/scratch/userid
+    - no file size limit
+    - 1M files cap per user
+    - files older than 30 days are deleted
+- work & scratch are linked from home
+- research groups can purchase
+  - allocations
+  - storage space
+    - for
+      - group (like work but 5TB)
+      - archive
+    - datamgr.aci.ics.psu
+      - allow for faster data transfers
+*** Connecting
+- [[https://psu.account.box.com/login?redirect_url=%2Ffiles%2F0%2Ff%2F35563852835][ways to connect]]
+  - ssh in terminal
+    #+BEGIN_SRC shell
+    ssh userid@aci-b.aci.ics.psu.edu
+    # or
+    ssh userid@aci-i.aci.ics.psu.edu
+    #+END_SRC
+    - password doesn't show up!
+  - PuTTy on Windows
+  - Exceed onDemand to ACI-I [[https://ics.psu.edu/advanced-cyberinfrastructure/support/tutorials/exceed-ondemand/][tutorial]]
+    - config
+      - Xconfig: Desktop_mode_1280x1024.cfg
+      - Xstart: Gnome_Desktop.xs
+    - only 1 session
+    - you can always come back (don't log out, just quit)
+    - still gonna have to use cmdline
+      - Apps -> System Tools -> Terminal
+*** Terminal
+- things to know
+  - GIYF
+  - man
+  - banana
+- find total and available allocation hours
+  #+BEGIN_SRC shell
+  mam-list-funds -h
+  #+END_SRC
+- manual for commands
+  #+BEGIN_SRC shell
+  man cmd
+  #+END_SRC
+- see list of options using an improper flag
+  #+BEGIN_SRC shell
+  mam-list-funds --banana
+  #+END_SRC
+- 4 most basic commands
+  #+BEGIN_SRC shell
+  ls                            # list contents of curr dir
+  pwd                           # print current dir
+  cd scratch                    # change dir
+  cp logFile logFile_13Sept2017 # copy file
+  #+END_SRC
+- other useful commands
+  #+BEGIN_SRC shell
+  history # past commands
+  mv # move files
+  rm # remove files
+  mkdir # make
+  find # find files
+  grep # filter files
+  awk # text manipulator
+  id
+  du # disk space
+  clear # clear screen
+  env
+  ssh
+  more
+  #+END_SRC
+- special characters
+  #+BEGIN_SRC shell
+  cd ~ # move to home
+  cd . # move to here (stay here)
+  cd .. # move one dir up
+  ls *.png # list all png
+  ls -1 | grep png # pipe output of ls to other commands
+  ls > log.ls # put output in a file
+  #+END_SRC
+*** Modules
+- wrapper for individual program
+  - e.g. in order to use Matlab you need to first load its module
+- show modules currently available
+  #+BEGIN_SRC shell
+  module avail
+  #+END_SRC
+- search for modules
+  #+BEGIN_SRC shell
+  module spider vasp
+  #+END_SRC
+- load a module optionally w/ specific version (otherwise will you the default)
+  #+BEGIN_SRC shell
+  module load ansys/18.1
+  #+END_SRC
+  better to specify version.
+- module families
+  #+BEGIN_SRC shell
+  module avail
+  module load gcc/5.3.1
+  module avail # new modules (compiled with hence conditional on gcc/5.3.1) will show up
+  #+END_SRC
+- other cmds
+  #+BEGIN_SRC shell
+  module list # list loaded modules
+  module purge # clean up loaded modules
+  module show modName # where libs of the module are, which env vars are setup
+  #+END_SRC
+  - e.g. w/ boost module you can use show to help you set up lib paths when compiling w/ it
+*** Transfer data
+- cmdline
+  #+BEGIN_SRC shell
+  scp lFile userid@datamgr.aci.ics.psu.edu:~/work/
+  rsync ...
+  sftp ...
+  #+END_SRC
+- programs: WinSCP, Filezilla
+  - use
+- via Box, Dropbox w/ EoD's Firefox interface (no syncing)
+  - (and no sound!)
+- specific programs: Globus, Aspera
+*** Submitting a Job
+- submission scripts
+  - two sections
+    - PBS directives
+      #+BEGIN_SRC shell
+      #PBS directive ...
+      #+END_SRC
+      - give requested resources
+      - only at beginning
+    - commands
+    - 
+  - to submit
+    #+BEGIN_SRC shell
+    qsub submitScript.pbs
+    #+END_SRC
+  - e.g.
+    #+BEGIN_SRC shell
+    #!/bin/bash
+    #PBS -l nodes=1:ppn=1
+    #PBS -l walltime=5:00
+    #PBS -A open
+
+    echo "Job started on $(hostname) at $(date)"
+
+    module purge
+    module load matlab/R2016a
+
+    # goto dir where the script lives
+    cd $PBS_O_WORKDIR
+
+    matlab-bin -nodisplay -nosplash < runThis.m > log.matlabRun
+
+    echo "Job ended at $(date)"
+    #+END_SRC
+** Info
+- ICS docs [[ics.psu.edu]]
+- iAsk
+  - iAsk at ics.psu.edu, 54275
+- check doc of other batch systems: TACC, OSC
+- seminar 2
+  - submitting job
+  - compiling simple codes
+  - allocation usage
+  - intro to parallelization
+    - distributed vs shared memory
+  - data moving
+    - globus, rsync
+- seminar 3 (Feb 2018)
+  - optimization techniques
