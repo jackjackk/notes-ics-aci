@@ -1,6 +1,6 @@
 #+OPTIONS: ^:nil
 
-* System Basics  [[https://psu.app.box.com/s/usn4m5zr2io79idvi7vxn2nsxwkfci0j][Slides]] [2017-09-14 Thu]                                                      :TOC_3:
+* System Basics [2017-09-14 Thu] ([[https://psu.app.box.com/s/usn4m5zr2io79idvi7vxn2nsxwkfci0j][Slides]])                           :TOC_3:
    - [[#ics--hpc][ICS & HPC]]
    - [[#ics-aci][ICS-ACI]]
      - [[#file-systems][File systems]]
